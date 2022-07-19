@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LicensingLibrary", "LicensingLibrary\LicensingLibrary.csproj", "{4E0A4339-90C5-4BE8-A047-08D671F075CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LicensingLibrary.Tests", "LicensingLibrary.Tests\LicensingLibrary.Tests.csproj", "{F9C291EC-633E-4DA1-99EB-1AD95C5CDCBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~ CI-CD", "~ CI-CD", "{31644821-C292-4CF0-8E92-1DDB0659D477}"
+	ProjectSection(SolutionItems) = preProject
+		.gitlab-ci.yml = .gitlab-ci.yml
+		installcredprovider.sh = installcredprovider.sh
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E0A4339-90C5-4BE8-A047-08D671F075CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0A4339-90C5-4BE8-A047-08D671F075CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0A4339-90C5-4BE8-A047-08D671F075CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0A4339-90C5-4BE8-A047-08D671F075CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9C291EC-633E-4DA1-99EB-1AD95C5CDCBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9C291EC-633E-4DA1-99EB-1AD95C5CDCBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9C291EC-633E-4DA1-99EB-1AD95C5CDCBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9C291EC-633E-4DA1-99EB-1AD95C5CDCBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFBE8C59-605A-481C-AB36-439ABF8CF0DE}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,63 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.0-alpine
+
+variables:
+  PROJECT_NAME: LicensingLibrary
+
+stages:
+  - build
+  - test
+  - publish
+
+.build_template: &build_template
+  stage: build
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - ./*/bin/**
+      - ./*/obj/**
+      - ./nuget/**
+  cache:
+    key: $CI_COMMIT_REF_NAME
+    paths:
+      - ./packages/**
+  script:
+    - dotnet restore --packages ./packages
+    - dotnet build -c Release --no-restore /p:Version=$VERSION
+    - dotnet pack $PROJECT_NAME -c Release --no-build -o nuget /p:Version=$VERSION
+
+build:release:
+  <<: *build_template
+  only:
+    - /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9]+)?$/
+  variables:
+    VERSION: $CI_COMMIT_REF_NAME
+
+build:dev:
+  <<: *build_template
+  except:
+    - /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9]+)?$/
+  variables:
+    VERSION: 0.1.0-dev
+
+test:
+  stage: test
+  cache:
+    key: $CI_COMMIT_REF_NAME
+    policy: pull
+    paths:
+      - ./packages/**
+  script:
+    - for TEST_PROJECT in *.Tests; do
+    -   dotnet test -c Release --no-build $TEST_PROJECT
+    - done
+
+publish:
+  stage: publish
+  only:
+    - /^[0-9]+\.[0-9]+\.[0-9]+(?:-[a-z0-9]+)?$/
+  script:
+    - apk update
+    - apk add curl
+    - chmod +x ./installcredprovider.sh
+    - ./installcredprovider.sh
+    - dotnet nuget push -s $NUGET_SERVER -k AzureDevOps nuget/$PROJECT_NAME.*.*.*.nupkg
